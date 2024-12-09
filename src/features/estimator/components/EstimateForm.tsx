@@ -37,6 +37,7 @@ import { DateFormField } from "@/components/form/DateFormField";
 import { InputFormField } from "@/components/form/InputFormField";
 import { SwitchFormField } from "@/components/form/SwitchFormField";
 import { TextareaFormField } from "@/components/form/TextareaFormField";
+import { ResultsSummary } from "@/features/estimator/components/CompiledData";
 import { FormSchema } from "@/features/estimator/form/schema";
 import { CompiledData } from "@/features/estimator/form/types";
 import { formatDate } from "@/features/estimator/form/utils";
@@ -126,6 +127,22 @@ export function EstimateForm() {
     console.log("Form validation error");
   }
 
+  function handleSaveToJson() {
+    const json = JSON.stringify(compiledData, null, 2);
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "system-point-count-data.json";
+    link.click();
+  }
+
+  function handleSendToPDS() {
+    console.log(
+      "This should create a ticket in PDS zendesk with the project details.",
+    );
+  }
+
   return (
     <section className="space-y-4">
       {/* Form Card */}
@@ -205,42 +222,36 @@ export function EstimateForm() {
                           <TableRow key={row.id}>
                             <TableCell>
                               <InputFormField
-                                key={row.id}
                                 name={`systems.${index}.name`}
                                 placeholder="Enter system name"
                               />
                             </TableCell>
                             <TableCell>
                               <InputFormField
-                                key={row.id}
                                 type="number"
                                 name={`systems.${index}.inputs`}
                               />
                             </TableCell>
                             <TableCell>
                               <InputFormField
-                                key={row.id}
                                 type="number"
                                 name={`systems.${index}.outputs`}
                               />
                             </TableCell>
                             <TableCell>
                               <InputFormField
-                                key={row.id}
                                 type="number"
                                 name={`systems.${index}.netVars`}
                               />
                             </TableCell>
                             <TableCell>
                               <InputFormField
-                                key={row.id}
                                 type="number"
                                 name={`systems.${index}.typicals`}
                               />
                             </TableCell>
                             <TableCell>
                               <InputFormField
-                                key={row.id}
                                 type="number"
                                 name={`systems.${index}.complexity`}
                               />
@@ -343,16 +354,21 @@ export function EstimateForm() {
               >
                 Discard
               </Button>
-              <Button variant="outline">Save For Later</Button>
-              <Button variant="default">Send to PDS for Quote</Button>
+              <Button variant="outline" onClick={() => handleSaveToJson()}>
+                Save to file
+              </Button>
+              <Button variant="default" onClick={() => handleSendToPDS()}>
+                Send to PDS
+              </Button>
             </div>
             <CardTitle>Summary</CardTitle>
           </CardHeader>
           <CardContent>
-            //TODO: Make this prettier
-            <pre>{JSON.stringify(compiledData, null, 2)}</pre>
+            {compiledData && <ResultsSummary data={compiledData} />}
           </CardContent>
-          <CardFooter className="flex justify-end gap-4"></CardFooter>
+          <CardFooter className="flex justify-end gap-4">
+            Add something here....
+          </CardFooter>
         </Card>
       ) : (
         <Label>No results yet.</Label>
