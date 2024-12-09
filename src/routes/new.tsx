@@ -10,13 +10,13 @@ export const Route = createFileRoute("/new")({
 function EstimateTile() {
   return (
     <PageContainer
-      title="New Estimate"
-      description="Create a system point count estimation"
+      title="Quote Request Form"
+      description="Request quote from a point count estimator."
       keywords="systems, point, count, estimation"
     >
       <Tile
-        title="Enter Systems and Points"
-        description="Use this form to enter the systems and points."
+        title="Quote Request Form"
+        description="Fill out the form with project and system details to request a quote."
       >
         <EstimateForm />
       </Tile>
