@@ -8,7 +8,6 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 
 import { Form, FormLabel } from "@/components/ui/form";
@@ -189,12 +188,19 @@ export function EstimateForm() {
                         name="commissioning"
                         label="Commissioning"
                       />
+                      <SwitchFormField
+                        name="training"
+                        label="Training"
+                      />
                     </div>
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="systems">
                   <AccordionTrigger>Systems and Points</AccordionTrigger>
                   <AccordionContent className="px-2">
+                    <div className="space-y-2">
+                      <p> Enter the number of wired inputs and outputs for each system.</p>
+                      </div>
                     <Table>
                       <TableHeader>
                         <TableRow>
@@ -361,13 +367,17 @@ export function EstimateForm() {
                 Send to PDS
               </Button>
             </div>
-            <CardTitle>Summary</CardTitle>
           </CardHeader>
           <CardContent>
             {compiledData && <ResultsSummary data={compiledData} />}
           </CardContent>
           <CardFooter className="flex justify-end gap-4">
-            Add something here....
+          <Button
+    variant="outline"
+    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+  >
+    Back to Top
+  </Button>
           </CardFooter>
         </Card>
       ) : (

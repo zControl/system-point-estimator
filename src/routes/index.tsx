@@ -1,26 +1,35 @@
 import { PageContainer } from "@/components/common/PageContainer";
 import { Button } from "@/components/ui/button";
 import { LandingHeader } from "@/features/landing/components/LandingHeader";
-import { createFileRoute } from "@tanstack/react-router";
+import { toast } from "@/hooks/use-toast";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   component: App,
 });
 
 function App() {
+  const handleLoadFromJSON = () => {
+    toast({
+      title: "Load From JSON",
+      description: "This feature is not implemented yet.",
+    })
+  };
   return (
     <>
       <LandingHeader />
       <PageContainer
-        title="Landing Page"
-        description="First page when you visit."
+        title="System Point Count Estimator"
+        description="Estimate point counts from a system  list."
         keywords="app, landing, page, first, welcome"
       >
         <div className="w-full h-96 flex flex-col items-center justify-center gap-8">
+          <Link to="/new" className="text-3xl font-bold">
           <Button variant={"outline"} size={"lg"}>
-            Start a new Estimate
+            Create A New Point Estimation
           </Button>
-          <Button variant={"outline"} size={"lg"}>
+          </Link>
+          <Button variant={"outline"} size={"lg"} onClick={handleLoadFromJSON}>
             Load From JSON
           </Button>
         </div>
