@@ -24,12 +24,16 @@ function App() {
         keywords="app, landing, page, first, welcome"
       >
         <div className="w-full h-96 flex flex-col items-center justify-center gap-8">
-          <Link to="/new" className="text-3xl font-bold">
-          <Button variant={"outline"} size={"lg"}>
-            Create A New Point Estimation
-          </Button>
+          <Link to="/new">
+            <Button variant={"outline"} size={"lg"}>
+              Start a new Estimate
+            </Button>
           </Link>
-          <Button variant={"outline"} size={"lg"} onClick={handleLoadFromJSON}>
+          <Button
+            variant={"outline"}
+            size={"lg"}
+            onClick={() => console.log("We can load from JSON here")}
+          >
             Load From JSON
           </Button>
         </div>
