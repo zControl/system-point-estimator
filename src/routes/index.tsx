@@ -29,10 +29,15 @@ function App() {
               Start a new Estimate
             </Button>
           </Link>
+          <Link to="/points">
+            <Button variant={"outline"} size={"lg"}>
+              Create Points
+            </Button>
+          </Link>
           <Button
             variant={"outline"}
             size={"lg"}
-            onClick={() => console.log("We can load from JSON here")}
+            onClick={() => handleLoadFromJSON()}
           >
             Load From JSON
           </Button>

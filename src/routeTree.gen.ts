@@ -11,6 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as PointsImport } from './routes/points'
 import { Route as NewImport } from './routes/new'
 import { Route as IndexImport } from './routes/index'
 import { Route as testTestImport } from './routes/(test)/test_'
@@ -20,6 +21,12 @@ import { Route as testTestABImport } from './routes/(test)/test.a.b_'
 import { Route as testTestABCImport } from './routes/(test)/test.a.b.c'
 
 // Create/Update Routes
+
+const PointsRoute = PointsImport.update({
+  id: '/points',
+  path: '/points',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const NewRoute = NewImport.update({
   id: '/new',
@@ -81,6 +88,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewImport
       parentRoute: typeof rootRoute
     }
+    '/points': {
+      id: '/points'
+      path: '/points'
+      fullPath: '/points'
+      preLoaderRoute: typeof PointsImport
+      parentRoute: typeof rootRoute
+    }
     '/(test)/test_': {
       id: '/(test)/test_'
       path: '/test'
@@ -124,6 +138,7 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/new': typeof NewRoute
+  '/points': typeof PointsRoute
   '/test': typeof testTestRoute
   '/test/a': typeof testTestARoute
   '/test/a/b': typeof testTestABRoute
@@ -134,6 +149,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/new': typeof NewRoute
+  '/points': typeof PointsRoute
   '/test': typeof testTestRoute
   '/test/a': typeof testTestARoute
   '/test/a/b': typeof testTestABRoute
@@ -145,6 +161,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/new': typeof NewRoute
+  '/points': typeof PointsRoute
   '/(test)/test_': typeof testTestRoute
   '/(test)/test/a_': typeof testTestARoute
   '/(test)/test/a/b_': typeof testTestABRoute
@@ -157,6 +174,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/new'
+    | '/points'
     | '/test'
     | '/test/a'
     | '/test/a/b'
@@ -166,6 +184,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/new'
+    | '/points'
     | '/test'
     | '/test/a'
     | '/test/a/b'
@@ -175,6 +194,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/new'
+    | '/points'
     | '/(test)/test_'
     | '/(test)/test/a_'
     | '/(test)/test/a/b_'
@@ -186,6 +206,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   NewRoute: typeof NewRoute
+  PointsRoute: typeof PointsRoute
   testTestRoute: typeof testTestRoute
   testTestARoute: typeof testTestARoute
   testTestABRoute: typeof testTestABRoute
@@ -196,6 +217,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   NewRoute: NewRoute,
+  PointsRoute: PointsRoute,
   testTestRoute: testTestRoute,
   testTestARoute: testTestARoute,
   testTestABRoute: testTestABRoute,
@@ -215,6 +237,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/new",
+        "/points",
         "/(test)/test_",
         "/(test)/test/a_",
         "/(test)/test/a/b_",
@@ -227,6 +250,9 @@ export const routeTree = rootRoute
     },
     "/new": {
       "filePath": "new.tsx"
+    },
+    "/points": {
+      "filePath": "points.tsx"
     },
     "/(test)/test_": {
       "filePath": "(test)/test_.tsx"
