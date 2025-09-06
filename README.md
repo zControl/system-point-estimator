@@ -13,3 +13,10 @@ Tanstack Query
 Shadcn/UI
 React Hook Form
 Zod
+
+## Deployment
+
+```bash
+npm run build
+
+```
